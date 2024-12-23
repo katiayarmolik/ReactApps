@@ -1,0 +1,56 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.header, .footer {
+  background-color: #333;
+  color: white;
+  padding: 1em;
+  text-align: center;
+}
+
+.header nav a {
+  color: white;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+.header nav a:hover {
+  text-decoration: underline;
+}
+
+main {
+  flex: 1;
+  padding: 2em;
+  text-align: center;
+}
+
+.product-list {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.product {
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  width: 200px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.product:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
