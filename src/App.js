@@ -1,23 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from './components/Header';
-import ProductList from './components/ProductList';
+import CurrencySelector from './components/CurrencySelector';
+import ConverterForm from './components/ConverterForm';
+import ExchangeRateDisplay from './components/ExchangeRateDisplay';
 
 const App = () => {
-  const products = [
-    { id: 1, name: 'Laptop', price: '$999' },
-    { id: 2, name: 'Phone', price: '$599' },
-    { id: 3, name: 'Tablet', price: '$399' },
-  ];
+    const [selectedCurrency, setSelectedCurrency] = useState('USD');
+    const [rates, setRates] = useState({
+        UAH: 41.9,
+        USD: 1.0,
+        EUR: 0.91,
+        GBP: 0.78,
+    });
 
-  return (
-    <div className="container">
-      <Header />
-      <main>
-        <h1>Welcome to the SHOP</h1>
-        <ProductList products={products} />
-      </main>
-    </div>
-  );
+    return (
+        <div className="app">
+            <Header />
+            <main>
+                <h1>Currency Exchange</h1>
+                <CurrencySelector
+                    selectedCurrency={selectedCurrency}
+                    setSelectedCurrency={setSelectedCurrency}
+                />
+                <ExchangeRateDisplay
+                    selectedCurrency={selectedCurrency}
+                    rates={rates}
+                />
+                <ConverterForm
+                    rates={rates}
+                    selectedCurrency={selectedCurrency}
+                />
+            </main>
+        </div>
+    );
 };
 
 export default App;
