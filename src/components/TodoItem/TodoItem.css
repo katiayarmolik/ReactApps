@@ -1,0 +1,49 @@
+.todo-item {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 12px;
+    margin: 8px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.todo-item .todo-status {
+    font-weight: bold;
+    border-radius: 12px;
+    padding: 6px 10px;
+    text-transform: capitalize;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.todo-item .status-completed {
+    background-color: #28a745;
+    color: white;
+}
+
+.todo-item .status-in-progress {
+    background-color: #5bc0de;
+    color: white;
+}
+
+.todo-item .todo-status:hover {
+    transform: scale(1.1);
+}
+
+.todo-item button {
+    background-color: #dc3545;
+    color: white;
+    font-size: 0.9rem;
+    padding: 5px 8px;
+    transition: background-color 0.3s ease;
+}
+
+.todo-item button:hover {
+    background-color: #c82333;
+}
