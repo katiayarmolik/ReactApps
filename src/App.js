@@ -9,6 +9,16 @@ const API_URL = "http://localhost:3001/todos";
 function App() {
   const [todos, setTodos] = useState([]);
   const [query, setQuery] = useState("");
+  const [sortOrder, setSortOrder] = useState("asc");
+
+  const toggleSortOrder = () => {
+    setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+  };
+
+  const sortedTodos = [...todos].sort((a, b) =>
+      sortOrder === "asc" ? a.id - b.id : b.id - a.id
+  );
+
 
   useEffect(() => {
     fetchTodos();
@@ -44,13 +54,32 @@ function App() {
     fetchTodos();
   };
 
+  const updateTodoTitle = async (id, newText) => {
+    await fetch(`${API_URL}/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text: newText }),
+    });
+    fetchTodos();
+  };
+
+
   return (
       <div className="app-container">
         <h1>TODO List</h1>
         <h2>Total Tasks: {todos.length}</h2>
         <TodoInput addTodo={addTodo}/>
         <SearchInput setQuery={setQuery}/>
-        <TodoList todos={todos} deleteTodo={deleteTodo} toggleTodoStatus={toggleTodoStatus}/>
+        <button onClick={toggleSortOrder}>
+          Sort by ID ({sortOrder === "asc" ? "Ascending" : "Descending"})
+        </button>
+        <TodoList
+            todos={sortedTodos}
+            deleteTodo={deleteTodo}
+            toggleTodoStatus={toggleTodoStatus}
+            updateTodoTitle={updateTodoTitle}
+        />
+
       </div>
   );
 }
