@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
 import { CartContext } from '../context/CartContext';
 import { Link } from 'react-router-dom';
 
 const Header = () => {
+    const { isAuthenticated, login, logout } = useContext(AuthContext);
     const { cart } = useContext(CartContext);
 
     return (
@@ -10,10 +12,17 @@ const Header = () => {
             <h1 style={styles.logo}>
                 <Link to="/" style={styles.link}>SHOP</Link>
             </h1>
-            <div style={styles.cart}>
+            <div>
                 <Link to="/cart" style={styles.link}>
                     🛒 Cart: {cart.length} items
                 </Link>
+                {isAuthenticated ? (
+                    <button style={styles.button} onClick={logout}>Logout</button>
+                ) : (
+                    <Link to="/login" style={styles.link}>
+                        <button style={styles.button}>Login</button>
+                    </Link>
+                )}
             </div>
         </header>
     );
@@ -30,12 +39,18 @@ const styles = {
     logo: {
         margin: 0,
     },
-    cart: {
-        fontWeight: 'bold',
-    },
     link: {
         textDecoration: 'none',
         color: 'white',
+        marginRight: '10px',
+    },
+    button: {
+        backgroundColor: '#28a745',
+        color: 'white',
+        border: 'none',
+        padding: '5px 10px',
+        cursor: 'pointer',
+        borderRadius: '5px',
     },
 };
 
