@@ -1,14 +1,19 @@
 import React, { useContext } from 'react';
 import { CartContext } from '../context/CartContext';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
     const { cart } = useContext(CartContext);
 
     return (
         <header style={styles.header}>
-            <h1 style={styles.logo}>SHOP</h1>
+            <h1 style={styles.logo}>
+                <Link to="/" style={styles.link}>SHOP</Link>
+            </h1>
             <div style={styles.cart}>
-                🛒 Cart: {cart.length} items
+                <Link to="/cart" style={styles.link}>
+                    🛒 Cart: {cart.length} items
+                </Link>
             </div>
         </header>
     );
@@ -27,6 +32,10 @@ const styles = {
     },
     cart: {
         fontWeight: 'bold',
+    },
+    link: {
+        textDecoration: 'none',
+        color: 'white',
     },
 };
 
